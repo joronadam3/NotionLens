@@ -1,4 +1,8 @@
 
+<p align="center">
+  <img src="https://raw.githubusercontent.com/joronadam3/NotionLens/main/logo.png" alt="NotionLens Logo" width="150"/>
+</p>
+
 # 🖼️ NotionLens
 
 **Automatically capture screenshots every minute and log them to Notion.**  
@@ -29,8 +33,8 @@ Designed for freelancers, creators, and productivity lovers who want to visually
 
 1. Clone the repo:
    ```bash
-   git clone https://github.com/yourusername/notionlens.git
-   cd notionlens
+   git clone https://github.com/joronadam3/NotionLens.git
+   cd NotionLens
    ```
 
 2. Install dependencies:
@@ -83,7 +87,7 @@ pm2 startup
 ## 📁 Folder Structure
 
 ```
-notionlens/
+NotionLens/
 ├── screenshot_to_notion.py   # Main script
 ├── .env                      # Environment variables (not committed)
 ├── README.md                 # You're reading this
@@ -125,4 +129,4 @@ echo ".env" >> .gitignore
 ---
 
 ## 📷 Built with ❤️ for productivity nerds
-By Adam Joron (https://github.com/joronadam3)
+By [Adam Joron](https://github.com/joronadam3)
