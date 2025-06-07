@@ -2,8 +2,8 @@ import subprocess
 import os
 import time
 from datetime import datetime
-import requests
-from dotenv import load_dotenv
+import requests # type: ignore
+from dotenv import load_dotenv # type: ignore
 import tempfile
 
 # Load environment variables from .env file
