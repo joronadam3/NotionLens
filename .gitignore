@@ -5,6 +5,8 @@ __pycache__/
 
 # C extensions
 *.so
+# Test files
+notionlens_menu_app.py
 
 # Distribution / packaging
 .Python
