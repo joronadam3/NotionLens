@@ -11,6 +11,7 @@
 ## 🚀 Features
 
 - ⏱️ Periodically takes macOS screenshots
+- 🖥️ Captures all connected displays
 - ☁️ Uploads screenshots to an S3 bucket (or any pre-signed URL)
 - 🧠 Creates entries in a Notion database
 - 🔁 Runs quietly in the background after setup
@@ -33,18 +34,40 @@
 git clone https://github.com/joronadam3/NotionLens.git
 cd NotionLens
 pip install -r requirements.txt
+pip install -e .
 ```
+
+The editable install registers the `notionlens` command globally so you can run
+it from any directory.
+
+> **Note** macOS will ask for **Screen Recording** permission on first run.
+Grant this to the terminal (or Python) so screenshots include your open apps.
 
 Run the interactive setup:
 
 ```bash
-python -m notionlens setup
+notionlens setup
 ```
+
+Command names are all lowercase.
 
 Start capturing screenshots in the background:
 
 ```bash
-python -m notionlens start
+notionlens start
+```
+
+Check the current status and tail the logs. If the process isn't running,
+`notionlens status` also prints the latest error lines from the log file:
+
+```bash
+notionlens status
+```
+
+Stop the background process:
+
+```bash
+notionlens stop
 ```
 
 Logs are written to `~/.notionlens/notionlens.log`.
