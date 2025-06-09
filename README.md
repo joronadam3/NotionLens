@@ -33,6 +33,7 @@
 git clone https://github.com/joronadam3/NotionLens.git
 cd NotionLens
 pip install -r requirements.txt
+pip install -e .
 ```
 
 Run the interactive setup:
@@ -40,6 +41,8 @@ Run the interactive setup:
 ```bash
 notionlens setup
 ```
+
+Command names are all lowercase.
 
 Start capturing screenshots in the background:
 
