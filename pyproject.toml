@@ -1,0 +1,15 @@
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "notionlens"
+version = "0.1.0"
+authors = [{ name = "Adam Joron" }]
+description = "Screenshot uploader to Notion"
+readme = "README.md"
+requires-python = ">=3.7"
+keywords = ["notion", "screenshot", "productivity"]
+
+[project.scripts]
+notionlens = "notionlens.cli:cli"
