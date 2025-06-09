@@ -71,9 +71,16 @@ def capture_once(cfg=None):
         return True
 
     try:
-        if retry_request(upload_to_s3) and retry_request(upload_to_notion):
+        s3_success = retry_request(upload_to_s3)
+        notion_success = retry_request(upload_to_notion)
+        if s3_success and notion_success:
             return True
-        raise RuntimeError("Upload retries exhausted")
+        failed_steps = []
+        if not s3_success:
+            failed_steps.append("S3 upload")
+        if not notion_success:
+            failed_steps.append("Notion upload")
+        raise RuntimeError(f"Upload retries exhausted. Failed steps: {', '.join(failed_steps)}")
     finally:
         try:
             os.remove(screenshot_path)
