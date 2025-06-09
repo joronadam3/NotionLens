@@ -38,13 +38,25 @@ pip install -r requirements.txt
 Run the interactive setup:
 
 ```bash
-python -m notionlens setup
+notionlens setup
 ```
 
 Start capturing screenshots in the background:
 
 ```bash
-python -m notionlens start
+notionlens start
+```
+
+Check the current status and tail the logs:
+
+```bash
+notionlens status
+```
+
+Stop the background process:
+
+```bash
+notionlens stop
 ```
 
 Logs are written to `~/.notionlens/notionlens.log`.
