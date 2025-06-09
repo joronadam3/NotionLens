@@ -17,7 +17,7 @@ def setup():
         from pyfiglet import Figlet
         fig = Figlet(font="slant")
         click.echo(fig.renderText("NotionLens"))
-    except Exception:
+    except ImportError:
         pass
     cfg = load_config()
     cfg["notion_api_key"] = click.prompt("Notion API Key", default=cfg.get("notion_api_key", ""), hide_input=True)
