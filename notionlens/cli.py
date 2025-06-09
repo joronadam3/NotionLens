@@ -28,8 +28,17 @@ def setup():
 def start():
     """Start capturing screenshots as a background process."""
     cmd = [sys.executable, "-m", "notionlens", "capture"]
-    subprocess.Popen(cmd, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, preexec_fn=os.setsid)
-    click.echo("NotionLens started in background")
+    log_path = os.path.expanduser("~/.notionlens/notionlens.log")
+    os.makedirs(os.path.dirname(log_path), exist_ok=True)
+    with open(log_path, "a") as log_file:
+        proc = subprocess.Popen(
+            cmd,
+            stdout=log_file,
+            stderr=log_file,
+            preexec_fn=os.setsid,
+        )
+    click.echo(f"NotionLens started in background with PID {proc.pid}")
+    click.echo("Find this PID in Activity Monitor to manage the process.")
 
 @cli.command(hidden=True)
 def capture():

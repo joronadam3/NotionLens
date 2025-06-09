@@ -49,6 +49,19 @@ python -m notionlens start
 
 Configuration is stored in `~/.notionlens/config.json`.
 
+## Usage
+
+Logs are written to `~/.notionlens/notionlens.log`.
+Check that the background process is running with:
+
+```bash
+ps -ef | grep notionlens
+```
+
+The output should show a `python -m notionlens capture` entry with its PID.
+You can also search for this PID in Activity Monitor to locate or stop the process.
+
+
 ---
 
 ## 📁 Folder Structure
