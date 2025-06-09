@@ -2,7 +2,6 @@ import os
 import subprocess
 import sys
 import click
-from pyfiglet import Figlet
 from .config import load_config, save_config
 from .capture import capture_loop
 
@@ -14,8 +13,12 @@ def cli():
 @cli.command()
 def setup():
     """Interactively set up configuration."""
-    fig = Figlet(font="slant")
-    click.echo(fig.renderText("NotionLens"))
+    try:
+        from pyfiglet import Figlet
+        fig = Figlet(font="slant")
+        click.echo(fig.renderText("NotionLens"))
+    except Exception:
+        pass
     cfg = load_config()
     cfg["notion_api_key"] = click.prompt("Notion API Key", default=cfg.get("notion_api_key", ""), hide_input=True)
     cfg["database_id"] = click.prompt("Notion Database ID", default=cfg.get("database_id", ""))

@@ -23,6 +23,7 @@
 - macOS (uses `screencapture`)
 - A Notion integration (API key + database)
 - An S3 bucket or similar with pre-signed PUT URL support
+- [pyfiglet](https://pypi.org/project/pyfiglet/) (optional, adds ASCII art to the setup command)
 
 ---
 
@@ -33,6 +34,7 @@
 git clone https://github.com/joronadam3/NotionLens.git
 cd NotionLens
 pip install -r requirements.txt
+# 'pyfiglet' is only used for ASCII art in the setup command, so you can skip it if desired
 ```
 
 Run the interactive setup:
