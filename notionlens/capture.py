@@ -4,7 +4,8 @@ import time
 from datetime import datetime
 import requests
 import tempfile
-from .config import load_config
+import logging
+from .config import load_config, LOG_PATH, CONFIG_DIR
 
 NOTION_API_URL = "https://api.notion.com/v1/pages"
 
@@ -14,13 +15,21 @@ def retry_request(func, retries=3, delay=5):
         try:
             return func()
         except Exception as e:
-            print(f"Attempt {attempt + 1} failed: {e}")
+            logging.error(f"Attempt {attempt + 1} failed: {e}")
             time.sleep(delay)
-    print("All retries failed")
+    logging.error("All retries failed")
     return None
 
 
 def capture_loop():
+    CONFIG_DIR.mkdir(parents=True, exist_ok=True)
+    logging.basicConfig(
+        filename=LOG_PATH,
+        level=logging.INFO,
+        format="%(asctime)s [%(levelname)s] %(message)s",
+    )
+    logging.info("Capture loop started")
+
     cfg = load_config()
     run_interval = cfg.get("interval", 1)
     notion_api_key = cfg.get("notion_api_key")
@@ -34,7 +43,7 @@ def capture_loop():
         screenshot_path = os.path.join(temp_dir, screenshot_filename)
 
         subprocess.run(["screencapture", "-x", screenshot_path])
-        print(f"Screenshot saved: {screenshot_path}")
+        logging.info(f"Screenshot saved: {screenshot_path}")
 
         s3_url = f"{s3_base_url}{screenshot_filename}"
 
@@ -42,7 +51,7 @@ def capture_loop():
             with open(screenshot_path, "rb") as file:
                 resp = requests.put(s3_url, data=file, headers={"Content-Type": "image/png"})
                 resp.raise_for_status()
-                print("Uploaded to S3")
+                logging.info("Uploaded to S3")
                 return True
 
         def upload_to_notion():
@@ -68,7 +77,7 @@ def capture_loop():
             }
             resp = requests.post(NOTION_API_URL, headers=headers, json=payload)
             resp.raise_for_status()
-            print("Uploaded to Notion")
+            logging.info("Uploaded to Notion")
 
         if retry_request(upload_to_s3):
             retry_request(upload_to_notion)
@@ -76,7 +85,7 @@ def capture_loop():
         try:
             os.remove(screenshot_path)
         except OSError as e:
-            print(f"Could not delete screenshot: {e}")
+            logging.error(f"Could not delete screenshot: {e}")
 
-        print(f"Waiting {run_interval} minute(s)...\n")
+        logging.info(f"Waiting {run_interval} minute(s)...")
         time.sleep(run_interval * 60)
