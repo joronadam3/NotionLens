@@ -47,6 +47,8 @@ Start capturing screenshots in the background:
 python -m notionlens start
 ```
 
+Logs are written to `~/.notionlens/notionlens.log`.
+
 Configuration is stored in `~/.notionlens/config.json`.
 
 ---

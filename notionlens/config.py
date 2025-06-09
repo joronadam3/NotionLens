@@ -4,6 +4,7 @@ from pathlib import Path
 
 CONFIG_DIR = Path.home() / ".notionlens"
 CONFIG_PATH = CONFIG_DIR / "config.json"
+LOG_PATH = CONFIG_DIR / "notionlens.log"
 
 DEFAULT_CONFIG = {
     "notion_api_key": "",

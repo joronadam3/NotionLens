@@ -3,7 +3,7 @@ import subprocess
 import sys
 import click
 from pyfiglet import Figlet
-from .config import load_config, save_config
+from .config import load_config, save_config, LOG_PATH, CONFIG_DIR
 from .capture import capture_loop
 
 @click.group()
@@ -28,8 +28,10 @@ def setup():
 def start():
     """Start capturing screenshots as a background process."""
     cmd = [sys.executable, "-m", "notionlens", "capture"]
-    subprocess.Popen(cmd, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, preexec_fn=os.setsid)
-    click.echo("NotionLens started in background")
+    CONFIG_DIR.mkdir(parents=True, exist_ok=True)
+    log_handle = open(LOG_PATH, "a")
+    subprocess.Popen(cmd, stdout=log_handle, stderr=log_handle, preexec_fn=os.setsid)
+    click.echo(f"NotionLens started in background. Logs: {LOG_PATH}")
 
 @cli.command(hidden=True)
 def capture():
