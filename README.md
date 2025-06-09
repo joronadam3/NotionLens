@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://raw.githubusercontent.com/joronadam3/NotionLens/main/logo.png" alt="NotionLens Logo" width="150"/>
+  <img src="https://raw.githubusercontent.com/joronadam3/NotionLens/main/assets/logo.png" alt="NotionLens Logo" width="150"/>
 </p>
 
 # 🖼️ NotionLens
