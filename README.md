@@ -33,18 +33,34 @@
 git clone https://github.com/joronadam3/NotionLens.git
 cd NotionLens
 pip install -r requirements.txt
+pip install -e .
 ```
 
 Run the interactive setup:
 
 ```bash
-python -m notionlens setup
+notionlens setup
 ```
+
+Command names are all lowercase.
 
 Start capturing screenshots in the background:
 
 ```bash
-python -m notionlens start
+notionlens start
+```
+
+Check the current status and tail the logs. If the process isn't running,
+`notionlens status` also prints the latest error lines from the log file:
+
+```bash
+notionlens status
+```
+
+Stop the background process:
+
+```bash
+notionlens stop
 ```
 
 Logs are written to `~/.notionlens/notionlens.log`.
