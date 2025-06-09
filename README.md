@@ -7,7 +7,7 @@
 **Automatically capture screenshots and log them to Notion.** Designed for freelancers and productivity lovers who want a visual record of their work sessions.
 
 ---
-![Product Launch Video](https://raw.githubusercontent.com/joronadam3/NotionLens/main/Product%20Launch%20Video.gif)
+![Product Launch Video](https://raw.githubusercontent.com/joronadam3/NotionLens/main/assets/Product%20Launch%20Video.gif)
 
 ## 🚀 Features
 
