@@ -40,6 +40,7 @@ Run the interactive setup:
 ```bash
 python -m notionlens setup
 ```
+The setup now attempts a test screenshot upload. If it fails, you'll be prompted to re-enter your credentials.
 
 Start capturing screenshots in the background:
 
