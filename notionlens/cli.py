@@ -7,6 +7,18 @@ from pyfiglet import Figlet
 from .config import load_config, save_config, LOG_PATH, CONFIG_DIR, PID_PATH
 from .capture import capture_loop
 
+
+def _get_error_logs(limit: int = 5):
+    """Return the last error lines from the log file."""
+    if not LOG_PATH.exists():
+        return []
+    with open(LOG_PATH, "r", encoding="utf-8") as f:
+        lines = f.readlines()
+    error_lines = [l.strip() for l in lines if "ERROR" in l or "Error" in l or "CRITICAL" in l]
+    if not error_lines:
+        error_lines = [l.strip() for l in lines[-limit:]]
+    return error_lines[-limit:]
+
 @click.group()
 def cli():
     """NotionLens command line interface."""
@@ -42,13 +54,16 @@ def start():
 @cli.command()
 def status():
     """Show status and live logs."""
+    error_logs = _get_error_logs()
     if PID_PATH.exists():
         pid = int(PID_PATH.read_text())
         running = True
+        err_msg = ""
         try:
             os.kill(pid, 0)
-        except OSError:
+        except OSError as e:
             running = False
+            err_msg = str(e)
         if running:
             click.echo(
                 f"NotionLens running (PID {pid}). Showing logs - press Ctrl+C to exit."
@@ -57,8 +72,15 @@ def status():
             return
         else:
             click.echo("NotionLens PID file exists but process not running.")
+            if err_msg:
+                click.echo(f"Error: {err_msg}")
     else:
         click.echo("NotionLens is not running.")
+
+    if error_logs:
+        click.echo("Last error logs:")
+        for line in error_logs:
+            click.echo(line)
 
 @cli.command()
 def stop():

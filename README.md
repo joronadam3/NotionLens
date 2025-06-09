@@ -50,7 +50,8 @@ Start capturing screenshots in the background:
 notionlens start
 ```
 
-Check the current status and tail the logs:
+Check the current status and tail the logs. If the process isn't running,
+`notionlens status` also prints the latest error lines from the log file:
 
 ```bash
 notionlens status
