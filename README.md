@@ -77,6 +77,14 @@ Configuration is stored in `~/.notionlens/config.json`.
 
 ---
 
+## 🗂️ Notion Template
+
+A ready-to-use Notion database template is available here:  
+[NotionLens Template](https://www.notion.com/templates/notinlens)
+
+
+---
+
 ## 📁 Folder Structure
 
 ```
